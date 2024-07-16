@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     image: { type: String }
-}, { timestamps: true, collection: 'person' }); // Explicitly set the collection name
+}, { timestamps: true, collection: 'person' });
+
 
 module.exports = mongoose.model('Person', userSchema);

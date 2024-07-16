@@ -1,6 +1,16 @@
 .App {
   text-align: center;
 }
+/* Adjust this value based on your Navbar height */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  padding-top: 70px;
+  /* Adjust this value based on your Navbar height */
+}
 
 .App-logo {
   height: 40vmin;
