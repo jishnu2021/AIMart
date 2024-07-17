@@ -10,12 +10,11 @@ app.use(cors());
 
 app.post("/signup", async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10); 
-    const user = new User({ ...req.body, password: hashedPassword }); 
-    const result = await user.save();
-    const response = result.toObject();
-    delete response.password; 
-    res.status(201).send(response);
+    const user = new User(req.body);
+    let result = await user.save();
+    result = result.toObject(); // Convert to plain JavaScript object
+    delete result.password;
+    res.status(201).send(result);
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
@@ -23,7 +22,7 @@ app.post("/signup", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   if (req.body.email && req.body.password) {
-    let user = await User.findOne(req.body).select("-password"); 
+    let user = await User.findOne(req.body).select("-password");
     if (user) {
       res.send(user);
     } else {

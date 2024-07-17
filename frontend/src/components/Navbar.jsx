@@ -1,20 +1,29 @@
 import React from "react";
 import logo from "../images/Logo.jpeg";
 import { useNavigate } from "react-router-dom";
+import { WalletContext } from "./WalletContext";
+import { useContext } from "react";
+
 
 const Navbar = () => {
+  const { walletAddress } = useContext(WalletContext);
   const navigate = useNavigate();
   const auth = localStorage.getItem("user");
+
+  const displayAddress = walletAddress
+    ? `${walletAddress.substring(0, 6)}...${walletAddress.substring(
+        walletAddress.length - 6
+      )}`
+    : "";
   const formchange = () => {
     navigate("/signup");
   };
 
-  const buttonchange=()=>{
+  const buttonchange = () => {
     localStorage.clear();
-    navigate("/signup")
-  }
+    navigate("/signup");
+  };
 
-  
   return (
     <>
       <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
@@ -29,25 +38,87 @@ const Navbar = () => {
             </span>
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            { !auth ?
-            <button
-              onClick={formchange}
-              style={{ width: "120px", padding: "0.5rem" }}
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Signup
-            </button> :
-            <button
-              onClick={buttonchange}
-              href="/signup"
-              style={{ width: "120px", padding: "0.5rem" ,marginLeft:"10px"}}
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Logout
-            </button>
-            }
+            {!auth ? (
+              <button
+                onClick={formchange}
+                style={{ width: "120px", padding: "0.5rem" }}
+                type="button"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Signup
+              </button>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  className="flex items-center justify-center w-10 h-10 text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  data-dropdown-toggle="user-dropdown"
+                  data-dropdown-placement="bottom"
+                >
+                  <span className="sr-only">Open user menu</span>
+                  <div className="w-10 h-10 flex items-center justify-center bg-gray-600 text-white rounded-full">
+                    {JSON.parse(auth).name.charAt(0).toUpperCase()}{" "}
+                  </div>
+                </button>
+                <div
+                  className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                  id="user-dropdown"
+                >
+                  <div className="px-4 py-3">
+                    <span className="block text-sm text-gray-900 dark:text-white">
+                      {JSON.parse(auth).name}
+                    </span>
+                    <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                      {JSON.parse(auth).email}
+                    </span>
+                  </div>
+                  <ul className="py-2" aria-labelledby="user-menu-button">
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Dashboard
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Settings
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="wallet"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        {walletAddress
+                          ? `Wallet: ${displayAddress}`
+                          : "Not connected"}
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        onClick={buttonchange}
+                        href="/signup"
+                        style={{
+                          width: "120px",
+                          padding: "0.5rem",
+                          marginLeft: "10px",
+                        }}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            )}
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"

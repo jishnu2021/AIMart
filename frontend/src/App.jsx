@@ -8,6 +8,7 @@ import About from "./components/About";
 import Pricing from "./components/Pricing";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
+import { Wallet } from "./components/Wallet";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="pricing" element={<Pricing />} />
             <Route path="service" element={<Services />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="wallet" element={<Wallet/>} />
           </Route>
           <Route path="signup" element={<Login />} />
         </Routes>

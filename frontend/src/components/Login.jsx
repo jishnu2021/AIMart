@@ -18,8 +18,27 @@ const Login = () => {
     const [email , setEmail]= useState("");
     const [password , setPassword]= useState("");
 
-    const handleLogin=()=>{
-        alert("hl")
+    const handleLogin=async(e)=>{
+        e.preventDefault();
+        try{
+          const result = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await result.json();
+          console.log(data);
+          if(data){
+            localStorage.setItem("user",JSON.stringify(data));
+            navigate("/");
+            }else{
+              alert("Enter the correct details!!");
+            }
+        }catch(error){
+            alert("Enter the correct details!!")
+        }
     }
 
         const handleSignup = async (e) => {
