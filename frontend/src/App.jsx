@@ -9,6 +9,7 @@ import Pricing from "./components/Pricing";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import { Wallet } from "./components/Wallet";
+import Setting from "./components/Setting";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="service" element={<Services />} />
             <Route path="contact" element={<Contact />} />
             <Route path="wallet" element={<Wallet/>} />
+            <Route path="setting" element={<Setting/>}/>
           </Route>
           <Route path="signup" element={<Login />} />
         </Routes>

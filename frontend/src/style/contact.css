@@ -1,13 +1,15 @@
-.container {
+
+.box1{
     margin: 0 auto;
     position: relative;
     width: 100%;
     min-height: 90vh;
     padding: 2rem;
-    background-color: #fafafa;
+    background: linear-gradient(135deg, #71b7e6, #000000);
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
 }
 
 .form {
@@ -321,7 +323,7 @@ textarea.input {
 }
 
 @media (max-width: 480px) {
-    .container {
+    .box1 {
         padding: 1.5rem;
     }
 
