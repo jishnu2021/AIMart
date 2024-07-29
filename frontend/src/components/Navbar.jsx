@@ -6,6 +6,8 @@ import { useContext } from "react";
 
 
 const Navbar = () => {
+
+  const path =p
   const { walletAddress } = useContext(WalletContext);
   const navigate = useNavigate();
   const auth = localStorage.getItem("user");
@@ -98,7 +100,7 @@ const Navbar = () => {
                       >
                         {walletAddress
                           ? `Wallet: ${displayAddress}`
-                          : "Not connected"}
+                          : "Connect your wallet"}
                       </a>
                     </li>
                     <li>
@@ -158,7 +160,7 @@ const Navbar = () => {
                   className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                   aria-current="page"
                 >
-                  About
+                  Docs
                 </a>
               </li>
               <li>
