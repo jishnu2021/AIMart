@@ -15,23 +15,6 @@ const Setting = () => {
   };
 
   const auth = localStorage.getItem("user");
-
-  if (auth) {
-    // Split the string by space
-    const nameParts = auth.split(" ");
-
-    // Assuming the first part is the first name and the last part is the last name
-    const firstName = nameParts[0];
-    const lastName =
-      nameParts.length > 1 ? nameParts[nameParts.length - 1] : "";
-
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-  } else {
-    console.log("No user information found in localStorage.");
-  }
-
-
   return (
     <div className="box">
       <div className="container1">
@@ -55,7 +38,7 @@ const Setting = () => {
                 <span className="details">Full Name</span>
                 <input
                   type="text"
-                  placeholder="Enter your name"
+                  placeholder={JSON.parse(auth).name}
                   required
                 />
               </div>
@@ -65,7 +48,11 @@ const Setting = () => {
               </div>
               <div className="input-box">
                 <span className="details">Email</span>
-                <input type="text" placeholder="Enter your email" required />
+                <input
+                  type="text"
+                  placeholder={JSON.parse(auth).email}
+                  required
+                />
               </div>
               <div className="input-box">
                 <span className="details">Phone Number</span>

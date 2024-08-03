@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 const Navbar = () => {
 
-  const path =p
+  
   const { walletAddress } = useContext(WalletContext);
   const navigate = useNavigate();
   const auth = localStorage.getItem("user");

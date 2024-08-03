@@ -1,11 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 const Contact = require('./Database/Contact');
 const app = express();
 const cors = require("cors");
 require("./Database/config");
 const User = require("./Database/User");
+const Profile = require('./Database/Setting')
 app.use(express.json());
 app.use(cors());
 
@@ -42,7 +42,19 @@ app.post("/contactus",async(req,res)=>{
     res.status(201).send(result);
     }catch(error){
       res.status(400).send({error:error.message});
-      }    
+      }
+})
+
+
+app.post('/setting',async(req,res)=>{
+  try{
+    const profile = new Profile(req.body);
+    let result = await profile.save();
+    result = result.toObject();
+    res.status(201).send(result);
+    }catch(error){
+      res.status(400).send({error:error.message});
+      }
 })
 
 app.listen(5000, () => {
