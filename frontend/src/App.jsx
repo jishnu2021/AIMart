@@ -13,6 +13,7 @@ import Setting from "./components/Setting";
 
 function App() {
   return (
+    
     <Router>
       <Navbar />
       <div className="main-content">
